@@ -17,11 +17,13 @@ describe("Prazo API", () => {
 
 
         it("should return a MessageResponse", async () => {
+            await  apiClient.Token.autentica();
             const prazo = await apiClient.Prazo.nacional(ServicosCorreios.Sedex_SemContrato, "00070555", "85070200");
             assert.isTrue(prazo instanceof MessageResponse);
         });
 
         it("should return a Prazo", async () => {
+            await  apiClient.Token.autentica();
             const prazo = await apiClient.Prazo.nacional(ServicosCorreios.Sedex_SemContrato, "85070555", "85070200");
             assert.isTrue(prazo instanceof Prazo);
         });

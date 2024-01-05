@@ -93,6 +93,7 @@ export abstract class BaseApiClient {
 
         try {
             const fullUrl = `${config.urlApi}${path}`;
+            console.log(fullUrl)
             const result = await HttpClient.post(fullUrl, config.basicAuth, body);
             return this.normalizeResult(result);
             // throw new Error(`Unknown result: ${JSON.stringify(result)}`)
@@ -119,7 +120,6 @@ export abstract class BaseApiClient {
     protected async get(path: string): Promise<any> {
 
         await this.validateToken();
-
         const lastToken = config.lastToken;
         if (lastToken == null || lastToken.token == null)
             throw new Error("Token is not defined");
@@ -203,13 +203,11 @@ export abstract class BaseApiClient {
         config.checkIsInitialized();
 
         if (config.cartaoPostagem != null) {
-            console.log("autenticaCartaoPostagem");
             await this.autenticaCartaoPostagem();
             return;
         }
 
         if (config.contrato != null) {
-            console.log("autenticaContrato");
             await this.autenticaContrato();
         }
 

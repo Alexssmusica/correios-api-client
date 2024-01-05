@@ -33,12 +33,14 @@ describe("Preco API", () => {
         });
 
         it("should return a Preco", async () => {
+            await  apiClient.Token.autentica();
             const preco = await apiClient.Preco.nacional(consulta);
             assert.isTrue(preco instanceof Preco);
         });
 
         it("should return a MessageResponse", async () => {
             (consulta as any).codigoProduto = "0000";
+            await  apiClient.Token.autentica();
             const preco = await apiClient.Preco.nacional(consulta);
             assert.isTrue(preco instanceof MessageResponse);
         });
